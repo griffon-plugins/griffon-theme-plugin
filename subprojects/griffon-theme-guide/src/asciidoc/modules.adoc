@@ -1,0 +1,20 @@
+
+[[_modules]]
+= Modules
+:subproject-base: {rootdir}/subprojects/griffon-theme-
+:java-source: /src/main/java/
+:package-base: org/codehaus/griffon/runtime/theme
+:numbered:
+
+The following sections display all bindings per module. Use this information to
+successfully override a binding on your own modules or to troubleshoot a module
+binding if the wrong type has been applied by the Griffon runtime.
+
+== Theme
+
+Module name: +theme+
+
+[source,java,options="nowrap"]
+----
+include::{subproject-base}core{java-source}{package-base}/ThemeModule.java[tags=bindings,indent=0]
+----

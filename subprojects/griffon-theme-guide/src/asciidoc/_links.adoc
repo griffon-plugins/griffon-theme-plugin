@@ -1,0 +1,2 @@
+
+:link_api_theme_aware: link:api/griffon/plugins/theme/ThemeAware.html[@griffon.plugins.theme.ThemeAware, window="_blank"]

@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'org.codehaus.griffon.griffon'
+
+griffon {
+    disableDependencyResolution = false
+    includeGroovyDependencies = false
+    version = rootProject.griffonVersion
+}
+
+apply from: rootProject.file('gradle/code-coverage.gradle')
+
+dependencies {
+    //testCompileOnly "org.codehaus.griffon:griffon-core-compile:${griffon.version}"
+
+    testRuntime "org.codehaus.griffon:griffon-guice:${griffon.version}"
+    testRuntime 'org.slf4j:slf4j-simple:1.7.7'
+}

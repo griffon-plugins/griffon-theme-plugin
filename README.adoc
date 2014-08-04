@@ -1,0 +1,14 @@
+= griffon-theme-plugin
+:version: 1.0.0.SNAPSHOT
+:linkattrs:
+
+image:https://travis-ci.org/griffon-plugins/griffon-theme-plugin.png?branch=master["Build Status", link="https://travis-ci.org/griffon-plugins/griffon-theme-plugin"]
+image:https://coveralls.io/repos/griffon-plugins/griffon-theme-plugin/badge.png["Coverage Status", link="https://coveralls.io/r/griffon-plugins/griffon-theme-plugin"]
+image:http://img.shields.io/:semver-{version}-red.svg["Semantic Versioning", link="http://semver.org"]
+
+---
+
+Enables injection of theme-based resources.
+
+Refer to the link:http://griffon-plugins.github.io/griffon-theme-plugin/[plugin guide, window="_blank"] for
+further information on configuration and usage.
