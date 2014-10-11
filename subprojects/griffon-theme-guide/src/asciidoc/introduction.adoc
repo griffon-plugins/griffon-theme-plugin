@@ -4,12 +4,12 @@
 
 Themes may be switched at any time based on two conditions:
 
- * a valid value for +ThemeManager.currentTheme+ is set
+ * a valid value for `ThemeManager.currentTheme` is set
  * the application's Locale is updated
 
 The following controller shows 4 actions showing how to trigger each one of
-these conditions. The application assumes there are two themes named +red+ and
-+blue+ and that there are locale aware versions of these themes for English and
+these conditions. The application assumes there are two themes named `red` and
+`blue` and that there are locale aware versions of these themes for English and
 Spanish
 
 [source,groovy,linenumbers,options="nowrap"]
@@ -33,7 +33,7 @@ class SampleController {
 ----
 
 Classes that should participate in theme injection must be anotated with
-+{link_api_theme_aware}+ and have their properties anotated with +@InjectedResource+,
+`{link_api_theme_aware}` and have their properties anotated with `@InjectedResource`,
 for example
 
 [source,groovy,linenumbers,options="nowrap"]
@@ -54,13 +54,13 @@ class SampleModel {
 
 The resource injection mechanism relies on application events in order to handle
 injections on instances. All griffon artifacts trigger an event upon creation
-(+NewInstance+) and destruction (+DestroyInstance+). Non griffon artifact
+(`NewInstance`) and destruction (`DestroyInstance`). Non griffon artifact
 instances can still participate in resource injection as long their classes
-are bound within a +Module+.
+are bound within a `Module`.
 
 Marking bean properties as observable makes it easier for the application to
 update itself when a theme change occurs. For example, a View may use the
-+color+ and +message+ model properties in this way
+`color` and `message` model properties in this way
 
 [source,groovy,linenumbers,options="nowrap"]
 ----
@@ -99,7 +99,7 @@ class SampleView {
 
 It's worth noting that if a resource cannot be resolved by a theme then the
 default application resources will be searched until the resource can be
-resolved or a +NoSuchResourceException+ is thrown.
+resolved or a `NoSuchResourceException` is thrown.
 
 == Configuration
 
