@@ -4,32 +4,31 @@
 <meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.0.preview.7">
+<meta name="generator" content="Asciidoctor 1.5.0">
 <meta name="author" content="Andres Almiray">
 <title>Griffon Theme Plugin</title>
 <link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./coderay-asciidoctor.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
 <h1>Griffon Theme Plugin</h1>
+<div class="details">
 <span id="author" class="author">Andres Almiray</span><br>
-<span id="revnumber">version 1.0.0-SNAPSHOT</span>
+<span id="revnumber">version 1.0.0</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_introduction">1. Introduction</a></li>
-<li>
+<li><a href="#_introduction">1. Introduction</a>
 <ul class="sectlevel2">
 <li><a href="#_configuration">1.1. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#_configuration">2. Build Configuration</a></li>
-<li>
+<li><a href="#_configuration">2. Build Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#_gradle">2.1. Gradle</a></li>
-<li>
+<li><a href="#_gradle">2.1. Gradle</a>
 <ul class="sectlevel3">
 <li><a href="#_automatic">2.1.1. Automatic</a></li>
 <li><a href="#_manual">2.1.2. Manual</a></li>
@@ -38,8 +37,7 @@
 <li><a href="#_maven">2.2. Maven</a></li>
 </ul>
 </li>
-<li><a href="#_modules">3. Modules</a></li>
-<li>
+<li><a href="#_modules">3. Modules</a>
 <ul class="sectlevel2">
 <li><a href="#_theme">3.1. Theme</a></li>
 </ul>
@@ -73,22 +71,41 @@ Spanish</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="groovy language-groovy"><span class="line-numbers"> 1</span><span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonController</span>
-<span class="line-numbers"> 2</span><span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
-<span class="line-numbers"> 3</span><span class="keyword">import</span> <span class="include">griffon.plugins.theme.ThemeManager</span>
-<span class="line-numbers"> 4</span><span class="keyword">import</span> <span class="include">javax.inject.Inject</span>
-<span class="line-numbers"> 5</span>
-<span class="line-numbers"> 6</span><span class="annotation">@ArtifactProviderFor</span>(GriffonController)
-<span class="line-numbers"> 7</span><span class="type">class</span> <span class="class">SampleController</span> {
-<span class="line-numbers"> 8</span>    <span class="annotation">@Inject</span>
-<span class="line-numbers"> 9</span>    <span class="directive">private</span> ThemeManager themeManager
-<span class="line-numbers"><strong>10</strong></span>
-<span class="line-numbers">11</span>    <span class="type">void</span> red(evt)  { themeManager.currentTheme = <span class="string"><span class="delimiter">'</span><span class="content">red</span><span class="delimiter">'</span></span> }
-<span class="line-numbers">12</span>    <span class="type">void</span> blue(evt) { themeManager.currentTheme = <span class="string"><span class="delimiter">'</span><span class="content">blue</span><span class="delimiter">'</span></span> }
-<span class="line-numbers">13</span>
-<span class="line-numbers">14</span>    <span class="type">void</span> spanish(evt) { application.localeAsString = <span class="string"><span class="delimiter">'</span><span class="content">es</span><span class="delimiter">'</span></span> }
-<span class="line-numbers">15</span>    <span class="type">void</span> english(evt) { application.localeAsString = <span class="string"><span class="delimiter">'</span><span class="content">en</span><span class="delimiter">'</span></span> }
-<span class="line-numbers">16</span>}</code></pre>
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+<strong>10</strong>
+11
+12
+13
+14
+15
+16
+</pre></td>
+  <td class="code"><pre><span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonController</span>
+<span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
+<span class="keyword">import</span> <span class="include">griffon.plugins.theme.ThemeManager</span>
+<span class="keyword">import</span> <span class="include">javax.inject.Inject</span>
+
+<span class="annotation">@ArtifactProviderFor</span>(GriffonController)
+<span class="type">class</span> <span class="class">SampleController</span> {
+    <span class="annotation">@Inject</span>
+    <span class="directive">private</span> ThemeManager themeManager
+
+    <span class="type">void</span> red(evt)  { themeManager.currentTheme = <span class="string"><span class="delimiter">'</span><span class="content">red</span><span class="delimiter">'</span></span> }
+    <span class="type">void</span> blue(evt) { themeManager.currentTheme = <span class="string"><span class="delimiter">'</span><span class="content">blue</span><span class="delimiter">'</span></span> }
+
+    <span class="type">void</span> spanish(evt) { application.localeAsString = <span class="string"><span class="delimiter">'</span><span class="content">es</span><span class="delimiter">'</span></span> }
+    <span class="type">void</span> english(evt) { application.localeAsString = <span class="string"><span class="delimiter">'</span><span class="content">en</span><span class="delimiter">'</span></span> }
+}</pre></td>
+</tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -98,18 +115,33 @@ for example</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="groovy language-groovy"><span class="line-numbers"> 1</span><span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonModel</span>
-<span class="line-numbers"> 2</span><span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
-<span class="line-numbers"> 3</span><span class="keyword">import</span> <span class="include">java.awt.Color</span>
-<span class="line-numbers"> 4</span><span class="keyword">import</span> <span class="include">griffon.transform.Observable</span>
-<span class="line-numbers"> 5</span><span class="keyword">import</span> <span class="include">griffon.core.resources.InjectedResource</span>
-<span class="line-numbers"> 6</span>
-<span class="line-numbers"> 7</span><span class="annotation">@griffon</span>.plugins.theme.ThemeAware
-<span class="line-numbers"> 8</span><span class="annotation">@ArtifactProviderFor</span>(GriffonModel)
-<span class="line-numbers"> 9</span><span class="type">class</span> <span class="class">SampleModel</span> {
-<span class="line-numbers"><strong>10</strong></span>    <span class="annotation">@Observable</span> <span class="annotation">@InjectedResource</span> <span class="predefined-type">Color</span> color
-<span class="line-numbers">11</span>    <span class="annotation">@Observable</span> <span class="annotation">@InjectedResource</span> <span class="predefined-type">String</span> message
-<span class="line-numbers">12</span>}</code></pre>
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+<strong>10</strong>
+11
+12
+</pre></td>
+  <td class="code"><pre><span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonModel</span>
+<span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
+<span class="keyword">import</span> <span class="include">java.awt.Color</span>
+<span class="keyword">import</span> <span class="include">griffon.transform.Observable</span>
+<span class="keyword">import</span> <span class="include">griffon.core.resources.InjectedResource</span>
+
+<span class="annotation">@griffon</span>.plugins.theme.ThemeAware
+<span class="annotation">@ArtifactProviderFor</span>(GriffonModel)
+<span class="type">class</span> <span class="class">SampleModel</span> {
+    <span class="annotation">@Observable</span> <span class="annotation">@InjectedResource</span> <span class="predefined-type">Color</span> color
+    <span class="annotation">@Observable</span> <span class="annotation">@InjectedResource</span> <span class="predefined-type">String</span> message
+}</pre></td>
+</tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -126,37 +158,71 @@ update itself when a theme change occurs. For example, a View may use the
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="groovy language-groovy"><span class="line-numbers"> 1</span><span class="keyword">package</span> org.example
-<span class="line-numbers"> 2</span>
-<span class="line-numbers"> 3</span><span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonView</span>
-<span class="line-numbers"> 4</span><span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
-<span class="line-numbers"> 5</span><span class="keyword">import</span> <span class="include">javax.swing.SwingConstants</span>
-<span class="line-numbers"> 6</span>
-<span class="line-numbers"> 7</span><span class="annotation">@ArtifactProviderFor</span>(GriffonView)
-<span class="line-numbers"> 8</span><span class="type">class</span> <span class="class">SampleView</span> {
-<span class="line-numbers"> 9</span>    FactoryBuilderSupport builder
-<span class="line-numbers"><strong>10</strong></span>    <span class="predefined-type">SampleModel</span> model
-<span class="line-numbers">11</span>
-<span class="line-numbers">12</span>    <span class="type">void</span> initUI() {
-<span class="line-numbers">13</span>        builder.with {
-<span class="line-numbers">14</span>            application(<span class="key">title</span>: <span class="string"><span class="delimiter">'</span><span class="content">Themes</span><span class="delimiter">'</span></span>,
-<span class="line-numbers">15</span>                <span class="key">preferredSize</span>: [<span class="integer">320</span>, <span class="integer">240</span>], <span class="key">pack</span>: <span class="predefined-constant">true</span>,
-<span class="line-numbers">16</span>                <span class="key">locationByPlatform</span>: <span class="predefined-constant">true</span>) {
-<span class="line-numbers">17</span>                borderLayout()
-<span class="line-numbers">18</span>                label(<span class="key">text</span>: bind { model.message },
-<span class="line-numbers">19</span>                      <span class="key">foreground</span>: bind { model.color },
-<span class="line-numbers"><strong>20</strong></span>                      <span class="key">constraints</span>: CENTER)
-<span class="line-numbers">21</span>                  panel(<span class="key">constraints</span>: WEST) {
-<span class="line-numbers">22</span>                      gridLayout(<span class="key">cols</span>: <span class="integer">1</span>, <span class="key">rows</span>: <span class="integer">4</span>)
-<span class="line-numbers">23</span>                      button(redAction)
-<span class="line-numbers">24</span>                      button(blueAction)
-<span class="line-numbers">25</span>                      button(spanishAction)
-<span class="line-numbers">26</span>                      button(englishAction)
-<span class="line-numbers">27</span>                  }
-<span class="line-numbers">28</span>            }
-<span class="line-numbers">29</span>        }
-<span class="line-numbers"><strong>30</strong></span>    }
-<span class="line-numbers">31</span>}</code></pre>
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+<strong>10</strong>
+11
+12
+13
+14
+15
+16
+17
+18
+19
+<strong>20</strong>
+21
+22
+23
+24
+25
+26
+27
+28
+29
+<strong>30</strong>
+31
+</pre></td>
+  <td class="code"><pre><span class="keyword">package</span> org.example
+
+<span class="keyword">import</span> <span class="include">griffon.core.artifact.GriffonView</span>
+<span class="keyword">import</span> <span class="include">griffon.metadata.ArtifactProviderFor</span>
+<span class="keyword">import</span> <span class="include">javax.swing.SwingConstants</span>
+
+<span class="annotation">@ArtifactProviderFor</span>(GriffonView)
+<span class="type">class</span> <span class="class">SampleView</span> {
+    FactoryBuilderSupport builder
+    <span class="predefined-type">SampleModel</span> model
+
+    <span class="type">void</span> initUI() {
+        builder.with {
+            application(<span class="key">title</span>: <span class="string"><span class="delimiter">'</span><span class="content">Themes</span><span class="delimiter">'</span></span>,
+                <span class="key">preferredSize</span>: [<span class="integer">320</span>, <span class="integer">240</span>], <span class="key">pack</span>: <span class="predefined-constant">true</span>,
+                <span class="key">locationByPlatform</span>: <span class="predefined-constant">true</span>) {
+                borderLayout()
+                label(<span class="key">text</span>: bind { model.message },
+                      <span class="key">foreground</span>: bind { model.color },
+                      <span class="key">constraints</span>: CENTER)
+                  panel(<span class="key">constraints</span>: WEST) {
+                      gridLayout(<span class="key">cols</span>: <span class="integer">1</span>, <span class="key">rows</span>: <span class="integer">4</span>)
+                      button(redAction)
+                      button(blueAction)
+                      button(spanishAction)
+                      button(englishAction)
+                  }
+            }
+        }
+    }
+}</pre></td>
+</tr></table></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -191,7 +257,7 @@ above, the application expects the following files to exist</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="java language-java">bind(ResourceResolver.class)
+<pre class="CodeRay highlight nowrap"><code data-lang="java">bind(ResourceResolver.class)
     .withClassifier(named(<span class="string"><span class="delimiter">&quot;</span><span class="content">red</span><span class="delimiter">&quot;</span></span>))
     .toProvider(<span class="keyword">new</span> ResourceResolverProvider(<span class="string"><span class="delimiter">&quot;</span><span class="content">red</span><span class="delimiter">&quot;</span></span>))
     .asSingleton();
@@ -221,8 +287,8 @@ may include the following snippet in <code>build.gradle</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="groovy language-groovy">dependencies {
-    griffon 'org.codehaus.griffon.plugins:griffon-theme-plugin:1.0.0-SNAPSHOT'
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    griffon 'org.codehaus.griffon.plugins:griffon-theme-plugin:1.0.0'
 }</code></pre>
 </div>
 </div>
@@ -237,8 +303,8 @@ may include the following snippet in <code>build.gradle</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="groovy language-groovy">dependencies {
-    compile 'org.codehaus.griffon.plugins:griffon-theme-core:1.0.0-SNAPSHOT'
+<pre class="CodeRay highlight nowrap"><code data-lang="groovy">dependencies {
+    compile 'org.codehaus.griffon.plugins:griffon-theme-core:1.0.0'
 }</code></pre>
 </div>
 </div>
@@ -252,12 +318,12 @@ snippet before the <code>&lt;build&gt;</code> element</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="xml language-xml"><span class="tag">&lt;dependencyManagement&gt;</span>
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependencyManagement&gt;</span>
     <span class="tag">&lt;dependencies&gt;</span>
         <span class="tag">&lt;dependency&gt;</span>
             <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
             <span class="tag">&lt;artifactId&gt;</span>griffon-theme-plugin<span class="tag">&lt;/artifactId&gt;</span>
-            <span class="tag">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+            <span class="tag">&lt;version&gt;</span>1.0.0<span class="tag">&lt;/version&gt;</span>
             <span class="tag">&lt;type&gt;</span>pom<span class="tag">&lt;/type&gt;</span>
             <span class="tag">&lt;scope&gt;</span>import<span class="tag">&lt;/scope&gt;</span>
         <span class="tag">&lt;/dependency&gt;</span>
@@ -270,7 +336,7 @@ snippet before the <code>&lt;build&gt;</code> element</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="xml language-xml"><span class="tag">&lt;dependency&gt;</span>
+<pre class="CodeRay highlight nowrap"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
     <span class="tag">&lt;groupId&gt;</span>org.codehaus.griffon.plugins<span class="tag">&lt;/groupId&gt;</span>
     <span class="tag">&lt;artifactId&gt;</span>griffon-theme-core<span class="tag">&lt;/artifactId&gt;</span>
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
@@ -294,7 +360,7 @@ binding if the wrong type has been applied by the Griffon runtime.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay nowrap"><code class="java language-java">bind(ThemeManager.class)
+<pre class="CodeRay highlight nowrap"><code data-lang="java">bind(ThemeManager.class)
     .to(DefaultThemeManager.class)
     .asSingleton();
 
@@ -321,8 +387,8 @@ bind(ResourceInjector.class)
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0-SNAPSHOT<br>
-Last updated 2014-08-04 15:13:54 CEST
+Version 1.0.0<br>
+Last updated 2014-08-19 08:56:17 CDT
 </div>
 </div>
 </body>
