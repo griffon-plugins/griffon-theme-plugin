@@ -1,5 +1,4 @@
 = griffon-theme-plugin
-:version: 1.0.0.SNAPSHOT
 :linkattrs:
 :project-name: griffon-theme-plugin
 
