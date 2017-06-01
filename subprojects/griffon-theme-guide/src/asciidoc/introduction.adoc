@@ -122,4 +122,6 @@ These themes must be registered using a Module, for example
 include::{subproject-base}core{test-source}{package-base}/ThemeTest.java[tags=bindings,indent=0]
 ----
 
+Griffon version: {griffon-version}
+
 
