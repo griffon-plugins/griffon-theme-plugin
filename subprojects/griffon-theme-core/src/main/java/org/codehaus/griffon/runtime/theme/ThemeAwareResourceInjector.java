@@ -21,8 +21,6 @@ import griffon.annotations.core.Nonnull;
 import griffon.annotations.core.Nullable;
 import griffon.core.GriffonApplication;
 import griffon.core.events.DestroyInstanceEvent;
-import griffon.core.properties.PropertyChangeEvent;
-import griffon.core.properties.PropertyChangeListener;
 import griffon.core.resources.NoSuchResourceException;
 import griffon.plugins.theme.ThemeAware;
 import griffon.plugins.theme.ThemeManager;
@@ -58,29 +56,22 @@ public class ThemeAwareResourceInjector extends AbstractResourceInjector {
 
         application.getEventRouter().subscribe(this);
 
-        themeManager.addPropertyChangeListener(ThemeManager.PROPERTY_CURRENT_THEME, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent event) {
-                LOG.info("Theme changed to {}", event.getNewValue());
-                for (Object instance : instanceStore) {
-                    injectResources(instance);
-                }
+        themeManager.addPropertyChangeListener(ThemeManager.PROPERTY_CURRENT_THEME, event -> {
+            LOG.info("Theme changed to {}", event.getNewValue());
+            for (Object instance : instanceStore) {
+                injectResources(instance);
             }
         });
 
-        application.addPropertyChangeListener(PROPERTY_LOCALE, new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-                for (Object instance : instanceStore) {
-                    injectResources(instance);
-                }
+        application.addPropertyChangeListener(PROPERTY_LOCALE, event -> {
+            for (Object instance : instanceStore) {
+                injectResources(instance);
             }
         });
     }
 
     @EventHandler
     public void handleDestroyInstanceEvent(@Nonnull DestroyInstanceEvent<?> event) {
-        System.out.println("instanceStore = " + instanceStore);
-        System.out.println("instance = " + event.getInstance());
-        System.out.println(instanceStore.contains(event.getInstance()));
         if (instanceStore.contains(event.getInstance())) {
             instanceStore.remove(event.getInstance());
         }
