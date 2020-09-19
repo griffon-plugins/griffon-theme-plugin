@@ -15,17 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-config {
-    info {
-        name          = projectDescription
-        description   = projectDescription
-        inceptionYear = '2014'
-        tags          = ['griffon', 'plugin', 'theme']
-    }
+ext.projectDependencies = [
+    ':griffon-theme-core'
+]
 
-    coverage {
-        jacoco {
-            toolVersion = jacocoVersion
-        }
-    }
-}
+ext.projectDependencies.each { evaluationDependsOn it }

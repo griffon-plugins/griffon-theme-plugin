@@ -1,11 +1,13 @@
 /*
- * Copyright 2014-2017 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2014-2020 The author and/or original authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,24 +17,16 @@
  */
 package com.acme;
 
-import griffon.core.GriffonApplication;
 import griffon.core.artifact.GriffonModel;
-import griffon.core.resources.InjectedResource;
-import griffon.metadata.ArtifactProviderFor;
-import org.codehaus.griffon.runtime.core.artifact.AbstractGriffonModel;
+import org.codehaus.griffon.runtime.core.artifact.AbstractVetoablePropertySourceGriffonModel;
+import org.kordamp.jipsy.ServiceProviderFor;
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
+import javax.application.resources.InjectedResource;
 
-@ArtifactProviderFor(GriffonModel.class)
-public class NotThemeAwareModel extends AbstractGriffonModel {
+@ServiceProviderFor(GriffonModel.class)
+public class NotThemeAwareModel extends AbstractVetoablePropertySourceGriffonModel {
     @InjectedResource
     private String string;
-
-    @Inject
-    public NotThemeAwareModel(@Nonnull GriffonApplication application) {
-        super(application);
-    }
 
     public String getString() {
         return string;

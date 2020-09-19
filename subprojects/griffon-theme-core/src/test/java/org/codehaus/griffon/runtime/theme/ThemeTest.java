@@ -1,11 +1,13 @@
 /*
- * Copyright 2014-2017 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2014-2020 The author and/or original authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,12 +19,13 @@ package org.codehaus.griffon.runtime.theme;
 
 import com.acme.NotThemeAwareModel;
 import com.acme.ThemeAwareModel;
-import griffon.core.ApplicationEvent;
+import griffon.annotations.core.Nonnull;
 import griffon.core.GriffonApplication;
+import griffon.core.events.DestroyInstanceEvent;
 import griffon.core.injection.Module;
 import griffon.core.resources.ResourceResolver;
-import griffon.core.test.GriffonUnitRule;
 import griffon.plugins.theme.ThemeManager;
+import griffon.test.core.GriffonUnitRule;
 import griffon.util.CollectionUtils;
 import griffon.util.TypeUtils;
 import org.codehaus.griffon.runtime.core.injection.AbstractModule;
@@ -32,14 +35,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import static griffon.util.AnnotationUtils.named;
-import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -137,7 +138,7 @@ public class ThemeTest {
         assertEquals("BLUE", model.getString());
 
         // when:
-        application.getEventRouter().publishEvent(ApplicationEvent.DESTROY_INSTANCE.getName(), asList(model.getClass(), model));
+        application.getEventRouter().publishEvent(DestroyInstanceEvent.of(ThemeAwareModel.class, model));
         themeManager.setCurrentTheme("red");
 
         // then:

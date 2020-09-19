@@ -1,11 +1,13 @@
 /*
- * Copyright 2014-2017 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2014-2020 The author and/or original authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,9 +17,12 @@
  */
 package org.codehaus.griffon.runtime.theme;
 
-import griffon.core.ApplicationEvent;
-import griffon.core.CallableWithArgs;
+import griffon.annotations.core.Nonnull;
+import griffon.annotations.core.Nullable;
 import griffon.core.GriffonApplication;
+import griffon.core.events.DestroyInstanceEvent;
+import griffon.core.properties.PropertyChangeEvent;
+import griffon.core.properties.PropertyChangeListener;
 import griffon.core.resources.NoSuchResourceException;
 import griffon.plugins.theme.ThemeAware;
 import griffon.plugins.theme.ThemeManager;
@@ -25,11 +30,9 @@ import org.codehaus.griffon.runtime.core.resources.AbstractResourceInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import javax.application.converter.ConverterRegistry;
+import javax.application.event.EventHandler;
 import javax.inject.Inject;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,9 +51,12 @@ public class ThemeAwareResourceInjector extends AbstractResourceInjector {
     private final ThemeManager themeManager;
 
     @Inject
-    public ThemeAwareResourceInjector(@Nonnull GriffonApplication application, @Nonnull ThemeManager themeManager) {
+    public ThemeAwareResourceInjector(@Nonnull ConverterRegistry converterRegistry, @Nonnull GriffonApplication application, @Nonnull ThemeManager themeManager) {
+        super(converterRegistry);
         this.application = requireNonNull(application, "Argument 'application' must not be null");
         this.themeManager = themeManager;
+
+        application.getEventRouter().subscribe(this);
 
         themeManager.addPropertyChangeListener(ThemeManager.PROPERTY_CURRENT_THEME, new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
@@ -61,18 +67,6 @@ public class ThemeAwareResourceInjector extends AbstractResourceInjector {
             }
         });
 
-        application.getEventRouter().addEventListener(ApplicationEvent.DESTROY_INSTANCE.getName(), new CallableWithArgs<Void>() {
-            @Override
-            @Nullable
-            public Void call(@Nullable Object... args) {
-                Object instance = args[1];
-                if (instanceStore.contains(instance)) {
-                    instanceStore.remove(instance);
-                }
-                return null;
-            }
-        });
-
         application.addPropertyChangeListener(PROPERTY_LOCALE, new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
                 for (Object instance : instanceStore) {
@@ -80,6 +74,16 @@ public class ThemeAwareResourceInjector extends AbstractResourceInjector {
                 }
             }
         });
+    }
+
+    @EventHandler
+    public void handleDestroyInstanceEvent(@Nonnull DestroyInstanceEvent<?> event) {
+        System.out.println("instanceStore = " + instanceStore);
+        System.out.println("instance = " + event.getInstance());
+        System.out.println(instanceStore.contains(event.getInstance()));
+        if (instanceStore.contains(event.getInstance())) {
+            instanceStore.remove(event.getInstance());
+        }
     }
 
     @Override
