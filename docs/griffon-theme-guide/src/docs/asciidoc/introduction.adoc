@@ -16,7 +16,7 @@ Spanish
 ----
 import griffon.core.artifact.GriffonController
 import griffon.plugins.theme.ThemeManager
-import org.kordamp.jipsy.ServiceProviderFor
+import org.kordamp.jipsy.annotations.ServiceProviderFor
 import javax.inject.Inject
 
 @ServiceProviderFor(GriffonController)
@@ -41,7 +41,7 @@ for example
 import griffon.core.artifact.GriffonModel
 import griffon.transform.beans.Observable
 import griffon.core.resources.InjectedResource
-import org.kordamp.jipsy.ServiceProviderFor
+import org.kordamp.jipsy.annotations.ServiceProviderFor
 import java.awt.Color
 
 @griffon.plugins.theme.ThemeAware
@@ -65,7 +65,7 @@ update itself when a theme change occurs. For example, a View may use the
 [source,groovy,linenumbers,options="nowrap"]
 ----
 import griffon.core.artifact.GriffonView
-import org.kordamp.jipsy.ServiceProviderFor
+import org.kordamp.jipsy.annotations.ServiceProviderFor
 import javax.swing.SwingConstants
 
 @ServiceProviderFor(GriffonView)
